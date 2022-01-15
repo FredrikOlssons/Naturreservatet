@@ -1,16 +1,218 @@
 <?php
 
-
 if (isset($_SERVER["REQUEST_METHOD"])) {
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
-        $_SESSION["animals"] = serialize($_POST);
-    }
+        if (isset($_POST["Tiger"]) && isset($_POST["Elefant"]) && isset($_POST["Giraff"]) && isset($_POST["Guldfisk"])) {
 
-        if (empty($_POST['Tiger']) && empty($_POST['Elefant']) && empty($_POST['Giraff']) && empty($_POST['Guldfisk'])) {
-            echo " <br/> Please fill in at least one of the fields";
-            exit;
+            $Tiger = $_POST["Tiger"];
+            $Elefant = $_POST["Elefant"];
+            $Giraff = $_POST["Giraff"];
+            $Guldfisk = $_POST["Guldfisk"];
+
+            $animals= [];
+            }
+    
+        $imageNumber = 1;
+
+        for ($array = 1; $array <= $Tiger; $array++) {
+
+            $rawData = file_get_contents("https://randomuser.me/api/");
+            $name = json_decode($rawData)->results[0]->name->first;
+
+            $tigerAddedToList = new Tiger("./Naturreservatet/Naturreservatet/imgs/tigers/tiger"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+            array_push($animals, $tigerAddedToList);
+            /* echo $tigerAddedToList->name;
+            echo $tigerAddedToList->animalColor;
+            echo $tigerAddedToList->animalPattern; */
+            //echo '<img src="'.$tigerAddedToList->picture.'" alt="Picture of a tiger">' ;
+            $imageNumber = incrementImageCount($imageNumber);
         }
+
+         $imageNumber = 1;
+
+         for ($array = 1; $array <= $Elefant; $array++) {
+
+             $rawData = file_get_contents("https://randomuser.me/api/");
+             $name = json_decode($rawData)->results[0]->name->first;
+
+             $elephantsAddedToList = new Elefant("./Naturreservatet/Naturreservatet/imgs/elephants/elephant"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+             array_push($animals, $elephantsAddedToList);
+             /* echo $elephantsAddedToList->name;
+             echo $elephantsAddedToList->animalColor;
+             echo $elephantsAddedToList->animalPattern; */
+             //echo '<img src="'.$elephantsAddedToList->picture.'" alt="Picture of a elephant">' ;
+             $imageNumber = incrementImageCount($imageNumber);
+         }
+         
+         $imageNumber = 1;
+
+         for ($array = 1; $array <= $Giraff; $array++) {
+            $rawData = file_get_contents("https://randomuser.me/api/");
+            $name = json_decode($rawData)->results[0]->name->first;
+
+            $giraffeAddedToList = new Giraff("./Naturreservatet/Naturreservatet/imgs/giraffes/giraffe"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+            array_push($animals, $giraffeAddedToList);
+             /* echo $giraffeAddedToList->name;
+             echo $giraffeAddedToList->animalColor;
+             echo $giraffeAddedToList->animalPattern; */
+             //echo '<img src="'.$giraffeAddedToList->picture.'" alt="Picture of a giraffe">' ;
+             $imageNumber = incrementImageCount($imageNumber);
+         }
+                   
+         $imageNumber = 1;
+         
+         for ($array = 1; $array <= $Guldfisk; $array++) {
+             $rawData = file_get_contents("https://randomuser.me/api/");
+             $name = json_decode($rawData)->results[0]->name->first;
+             
+             $goldfishAddedToList = new Guldfisk("./Naturreservatet/Naturreservatet/imgs/goldfishes/goldfish" . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+             array_push($animals, $goldfishAddedToList);
+            /*  echo $goldfishAddedToList->name;
+             echo $goldfishAddedToList->animalColor;
+             echo $goldfishAddedToList->animalPattern;
+             echo $text; */
+             //echo '<img src="'.$goldfishAddedToList->picture.'" alt="Picture of a goldfish">' ;
+             $imageNumber = incrementImageCount($imageNumber);
+            }
+
+            if (empty($_POST['Tiger']) && empty($_POST['Elefant']) && empty($_POST['Giraff']) && empty($_POST['Guldfisk'])) {
+                echo " <br/> Please fill in at least one of the fields";
+                exit;
+            }
+            
+            foreach ($animals as $animalInstance) {
+                $animalInstance->showPicture();
+                echo "<br>" .$animalInstance->name."<br>" ;// . " " . $animalInstance->makeSound() . '<br><br>';
+            }
+        }
+    }    
+    
+     function animalsColor() {
+        $color = array("Red", "Blue", "Green", "Black", "Pink");
+        $index =  rand(0, count($color) - 1);
+        $animalColor = $color[$index];
+        return $animalColor;
+    } 
+
+    function animalsPattern() {
+        $pattern = array("Spots", "Stripes", "Stains", "Rectangles", "Head");
+        $index = rand(0, count($pattern) - 1);
+        $animalPattern = $pattern[$index];
+        return $animalPattern;
+    }
+    
+    
+    abstract class Animal {
+        public function onClickCode() {
+            $text = 'alert("';
+            $text .= $this->name;
+            $text .= ": ";
+            $text .= $this->animalsColor;
+            $text .= ": ";
+            $text .= $this->animalsPattern;
+            $text .= ": ";
+            $text .= $this->makeSound();
+            $text .= '");';
+            return $text;
+            
+        }
+
+        
+        public $name;
+        public $animalColor;
+        public $animalPattern;
+        
+        function __construct($color, $name, $pattern){
+            $this->name = $name;
+            $this->animalColor = $color;
+            $this->animalPattern = $pattern;
+        }
+        
+        
+        
+        abstract function makeSound();
+        
+        function showPicture() {
+            echo "<img src= '".$this->picture."' onClick = '".$this->onClickCode(). "'/>";
+        }
+        
+        public function onClick() {
+            $text = 'alert'($this->name, $this->animalColor, $this->animalPattern, $this->makeSound());
+            return $text;  
+        }
+    }
+    
+    
+    
+    class Tiger extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            
+        }
+        
+        function makeSound() {
+            return "ROOOOOAAAAAR";
+        }
+    }
+    
+    class Elefant extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+        }
+        function makeSound() {
+            return "TUUUUUUUUUUUT";
+        }
+    }
+    
+    class Giraff extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "BRÖÖÖÖÖÖÖL";
+        }
+    }
+    
+    class Guldfisk extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "Blubbbb";
+        }
+    }
+    
+    function incrementImageCount($imageNumber) {
+        if($imageNumber == 5) {
+            return 1;
+        } else {
+            return $imageNumber + 1;
+        }
+    }
+    
+
+    /*
         if ($_POST["Tiger"]) {
             $tiger = ($_POST["Tiger"]);
             
@@ -29,82 +231,8 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             echo "<br>" . $Guldfisk . "st" . " Guldfisk(ar)";
             echo "<img src=\"imgs/goldfishes/eye-g243bc46fe_640.jpg\">";
         }
-}
-
-$animals= [];
-
-$tigerAddedToList = serialize($tiger);
-echo $tigerAddedToList;
-
-for ($array = 1; $array <= $_POST["Tiger"]; $array++) {
-
-    $tiger = new Tiger("<img src=\"imgs/tigers/tiger-gebd6d2e9f_640.jpg\">", "red", "Pelle");
-    echo $tiger;
-}
-
-
-abstract class Animal {
-    public $name;// = file_get_contents("https://randomuser.me/api/");
-    
-    function __construct($name){
-        $this->name = $name;
     }
     
-    public function getPicture()
-    {
-        return $this->picture;
-    }
-
-    abstract function makeSound();
-    
-    
-};
-
-
-
-class Tiger extends animal {
-    public $picture = "<img src=\"imgs/tigers/tiger-gebd6d2e9f_640.jpg\">";
-    protected $color;
-    
-    function __construct($pic, $color, $name) {
-        parent::__construct($name);
-
-        $this->picture = $pic;
-        $this->color = $color;
-    }
-
-    function makeSound() {
-        return "Roooaaaar";
-    }
-}
-
-class Elefant extends animal {
-
-    function makeSound() {
-        echo "TUUUUUUUUUUUT";
-    }
-}
-
-class Giraff extends animal {
-
-    function makeSound() {
-        echo "Brööööööl";
-    }
-}
-
-class Guldfisk extends animal {
-
-    function makeSound() {
-        echo "Blubbbb";
-    }
-}
-/* 
-
-$filename = $_FILES["uploadfile"]["name"];
-    $tempname = $_FILES["uploadfile"]["tmp_name"];    
-        $folder = "image/".$filename;
-
-        <img src='picturename.png' />
-
 */
-?>
+
+    ?>
