@@ -20,7 +20,7 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             $rawData = file_get_contents("https://randomuser.me/api/");
             $name = json_decode($rawData)->results[0]->name->first;
 
-            $tigerAddedToList = new Tiger("./Naturreservatet/Naturreservatet/imgs/tigers/tiger"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+            $tigerAddedToList = new Tiger("./imgs/tigers/tiger"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
             array_push($animals, $tigerAddedToList);
             /* echo $tigerAddedToList->name;
             echo $tigerAddedToList->animalColor;
@@ -36,7 +36,7 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
              $rawData = file_get_contents("https://randomuser.me/api/");
              $name = json_decode($rawData)->results[0]->name->first;
 
-             $elephantsAddedToList = new Elefant("./Naturreservatet/Naturreservatet/imgs/elephants/elephant"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+             $elephantsAddedToList = new Elefant("./imgs/elephants/elephant"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
              array_push($animals, $elephantsAddedToList);
              /* echo $elephantsAddedToList->name;
              echo $elephantsAddedToList->animalColor;
@@ -51,7 +51,7 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             $rawData = file_get_contents("https://randomuser.me/api/");
             $name = json_decode($rawData)->results[0]->name->first;
 
-            $giraffeAddedToList = new Giraff("./Naturreservatet/Naturreservatet/imgs/giraffes/giraffe"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+            $giraffeAddedToList = new Giraff("./imgs/giraffes/giraffe"  . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
             array_push($animals, $giraffeAddedToList);
              /* echo $giraffeAddedToList->name;
              echo $giraffeAddedToList->animalColor;
@@ -66,7 +66,7 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
              $rawData = file_get_contents("https://randomuser.me/api/");
              $name = json_decode($rawData)->results[0]->name->first;
              
-             $goldfishAddedToList = new Guldfisk("./Naturreservatet/Naturreservatet/imgs/goldfishes/goldfish" . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
+             $goldfishAddedToList = new Guldfisk("./imgs/goldfishes/goldfish" . $imageNumber . ".jpg", animalsColor(), $name, animalsPattern());
              array_push($animals, $goldfishAddedToList);
             /*  echo $goldfishAddedToList->name;
              echo $goldfishAddedToList->animalColor;
@@ -210,29 +210,5 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             return $imageNumber + 1;
         }
     }
-    
-
-    /*
-        if ($_POST["Tiger"]) {
-            $tiger = ($_POST["Tiger"]);
-            
-            //echo "<br>" . $tiger . "st" . " Tiger(s)";
-            //echo "<img src=\"imgs/tigers/tiger-gebd6d2e9f_640.jpg\">";
-        } if ($_POST['Elefant']) {
-            $Elefant = ($_POST["Elefant"]);
-            echo "<br>" . $Elefant . "st" . " Elefant(er)";
-            echo "<img src=\"imgs/elephants/elephant-g698425c8c_640.jpg\">";
-        } if ($_POST['Giraff']) {
-            $Giraff = ($_POST["Giraff"]);
-            echo "<br>" . $Giraff . "st" . " Giraff(er)";
-            echo "<img src=\"imgs/giraffes/giraffe-gbc5be7546_640.jpg\">";
-        } if ($_POST['Guldfisk']) {
-            $Guldfisk = ($_POST["Guldfisk"]);
-            echo "<br>" . $Guldfisk . "st" . " Guldfisk(ar)";
-            echo "<img src=\"imgs/goldfishes/eye-g243bc46fe_640.jpg\">";
-        }
-    }
-    
-*/
 
     ?>
