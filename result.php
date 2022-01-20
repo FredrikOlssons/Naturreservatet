@@ -1,5 +1,27 @@
 <?php
 
+//session_start()
+
+//if (isset($_SESSION))
+session_start();
+
+$animalQuantity = [];
+
+$amountOfTigers = unserialize($_SESSION["animals"])["Tiger"];
+$amountOfElephants = unserialize($_SESSION["animals"])["Elefant"];
+$amountOfGiraffes = unserialize($_SESSION["animals"])["Giraff"];
+$amountOfGoldfishes = unserialize($_SESSION["animals"])["Guldfisk"];
+
+
+
+
+if (isset($_SESSION["animals"])) {
+    header('Location:http://localhost:3000/results.php');
+}
+
+
+
+
 if (isset($_SERVER["REQUEST_METHOD"])) {
 
     if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -8,7 +30,7 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             $Tiger = $_POST["Tiger"];
             $Elefant = $_POST["Elefant"];
             $Giraff = $_POST["Giraff"];
-            $Guldfisk = $_POST["Guldfisk"];
+            $Guldfisk = $_POST["Guldfisk"]; //----------------------------------spara till session istället för post -> om det inte finns något sparat i den innan
 
             $animals= [];
             }
@@ -202,7 +224,96 @@ if (isset($_SERVER["REQUEST_METHOD"])) {
             return "Blubbbb";
         }
     }
-    
+
+    class Björn extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "Braaaaahh";
+        }
+    }
+
+    class Lejon extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "ROOOAAARRIMALION";
+        }
+    }
+
+    class Ros extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "Swischswischswisch";
+        }
+    }
+
+    class Gorilla extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "AaaawwAaaww";
+        }
+    }
+
+    class Pudu extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "Piiiiip";
+        }
+    }
+
+    class Antilop extends animal {
+        public $picture;
+        
+        function __construct($pic, $color, $name, $pattern) {
+            parent::__construct($color, $name, $pattern);
+            
+            $this->picture = $pic;
+            $this->color = $color;
+        }
+        
+        function makeSound() {
+            return "Bjäääähh";
+        }
+    }
     function incrementImageCount($imageNumber) {
         if($imageNumber == 5) {
             return 1;
