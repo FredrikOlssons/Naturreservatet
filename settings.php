@@ -1,5 +1,5 @@
 <?php
-
+ss
 session_start();
 
 if (isset($_SESSION["animals"])) {
