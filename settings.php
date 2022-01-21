@@ -20,16 +20,16 @@ if (isset($_SESSION["animals"])) {
 <body>
 
     <form action="./result.php" method="POST">
-        <input placeholder="Tiger" type="text" name="Tiger">
-        <input placeholder="Elefant" type="text" name="Elefant">
-        <input placeholder="Giraff" type="text" name="Giraff">
-        <input placeholder="Guldfisk" type="text" name="Guldfisk">
-        <input placeholder="Björn" type="text" name="Björn">
-        <input placeholder="Rosor" type="text" name="Rosor">
-        <input placeholder="Lejon" type="text" name="Lejon">
-        <input placeholder="Gorilla" type="text" name="Gorilla">
-        <input placeholder="Pudu" type="text" name="Pudu">
-        <input placeholder="Antilop" type="text" name="Antilop">
+        Tiger:<input placeholder="Tiger" type="number" max=5 name="Tiger"><br>
+        Elefant:<input placeholder="Elefant" type="number" max=5 name="Elefant"><br>
+        Giraff:<input placeholder="Giraff" type="number" max=5 name="Giraff"><br>
+        Guldfisk:<input placeholder="Guldfisk" type="number" max=5 name="Guldfisk"><br>
+        Björn:<input placeholder="Björn" type="number" max=5 name="Björn"><br>
+        Ros:<input placeholder="Rosor" type="number" max=5 name="Rosor"><br>
+        Lejon:<input placeholder="Lejon" type="number" max=5 name="Lejon"><br>
+        Gorilla:<input placeholder="Gorilla" type="number" max=5 name="Gorilla"><br>
+        Pudu:<input placeholder="Pudu" type="number" max=5 name="Pudu"><br>
+        Antilop:<input placeholder="Antilop" type="number" max=5 name="Antilop"><br>
 
         <button type="submit">SPARA</button>
     </form>

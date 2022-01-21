@@ -1,17 +1,20 @@
 <?php
 
-//session_start()
 
-//if (isset($_SESSION))
 session_start();
 
 $animalQuantity = [];
 
-$amountOfTigers = unserialize($_SESSION["animals"])["Tiger"];
-$amountOfElephants = unserialize($_SESSION["animals"])["Elefant"];
-$amountOfGiraffes = unserialize($_SESSION["animals"])["Giraff"];
-$amountOfGoldfishes = unserialize($_SESSION["animals"])["Guldfisk"];
-
+$quantityOfTigers = unserialize($_SESSION["animals"])["Tiger"];
+$quantityOfElephants = unserialize($_SESSION["animals"])["Elefant"];
+$quantityOfGiraffes = unserialize($_SESSION["animals"])["Giraff"];
+$quantityOfGoldfishes = unserialize($_SESSION["animals"])["Guldfisk"];
+$quantityOfBears = unserialize($_SESSION["animals"])["Björn"];
+$quantityOfRoses = unserialize($_SESSION["animals"])["Rosor"];
+$quantityOfLions = unserialize($_SESSION["animals"])["Lejon"];
+$quantityOfGorillas = unserialize($_SESSION["animals"])["Gorilla"];
+$quantityOfPudus = unserialize($_SESSION["animals"])["Pudu"];
+$quantityOfAntilopes = unserialize($_SESSION["animals"])["Antilop"];
 
 
 
